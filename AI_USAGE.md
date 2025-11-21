@@ -166,51 +166,7 @@ Generate all files with this structure and content now.
 **Co trzeba było coś poprawić/doprecyzować**
 - Przy dalszej implementacji musiałam zmienić dane przekazywane do funkcji służącej do logowania stawiania statków, ponieważ AI początkowo dało tablicę, a rozsądniej i wygodniej było przekazywać po jednym statku.
 
-### Prompt 2 - Implementacja logiki Board
-
-**Prompt**
-```text
-Implement the full logic for src/board/Board.ts. Follow these rules strictly:
-
-Do NOT modify imports.
-Do NOT change types or interfaces.
-Do NOT add new files.
-Implement ONLY inside the Board class.
-No logging, no console output, no extra helpers.
-
-Keep implementation:
-
-clean
-readable
-mid-level complexity
-deterministic
-
-Validate ship placement:
-
-the ship must fit inside the board
-the ship cannot overlap another ship
-
-When placing a ship:
-
-update state.ships
-mark ship fields in state.cells as "ship"
-
-Implement receiveShot:
-
-record shot in shotsFired
-update cell to "hit" or "miss"
-detect if a ship is sunk
-
-Implement allShipsSunk().
-```
-
-**Czy AI dało dobry kod za pierwszym razem?**
-- Nie. Logika była okej, jednak AI wygenerowało zbyt skomplikowaną strukturę.
-
-**Co trzeba było coś poprawić/doprecyzować**
-- AI wprowadziło dwa źródła prawdy dla jednej planszy - grid + state.cells. Zdecydowałam się poprosić o poprawę tego - po poprawie wszystko było już poprawnie.
-
-### Prompt 3 - Implementacja Player
+### Prompt 2 - Implementacja Player
 
 **Prompt**
 ```text
@@ -253,7 +209,7 @@ Return the full content of Player.ts.
 **Co trzeba było coś poprawić/doprecyzować**
 - Było trzeba poprawić logikę oddawania strzałów. Zostało to naprawione przeze mnie (informacje w punkcie 3.).
 
-### Prompt 4 - Implementacja index.ts (główna pętla gry + logger)
+### Prompt 3 - Implementacja index.ts (główna pętla gry + logger)
 
 **Prompt**
 ```text
@@ -297,7 +253,7 @@ JUST produce the correct TypeScript code for this file.
 - Trzeba było poprawić błędy, aby program w ogóle się odpalił. AI próbowało odwołać się do board.width i board.height zamiast board.config.height/width. Ponadto, podczas tworzenia planszy, bezpośrednio próbował ustawić height oraz width w konstruktorze planszy, zamiast zrobić poprzez stworzenie nowego BoardConfig.
 Poprawki były proste, zatem zostały wykonane własnoręcznie.
 
-### Prompt 5 - Generowanie testów jednostkowych
+### Prompt 4 - Generowanie testów jednostkowych
 
 **Prompt**
 ```text
@@ -318,18 +274,7 @@ Include:
 
 ## 3. Poprawki
 
-### 1. Zbyt skomplikowane źródło prawdy
-
-**Problem**
-- AI wygenerowało Board, który trzymał stan w:
-- jakimś własnym gridzie używanym do logiki
-- oraz w state.cells
-Oznaczało dwie prawdy o tym samym stanie, co mogło przytczynić się do rozjazdów i trudniejszego debugowania.
-
-**Naprawa**
-- Zrefaktoryzywałam Board do jednego źródła prawdy - wszystko oparte na state.cells.
-
-### 2. Błędne założenie w Player.takeTurn
+### 1. Błędne założenie w Player.takeTurn
 
 **Problem**
 - AI założyło, że 
@@ -342,7 +287,7 @@ czyli sprawdzało, jakie opponent oddał strzały w planszę gracza pierwszego -
 **Naprawa**
 - Poprawiłam, skąd brać informacje o już wykonanych strzałach - zamiast this.board należało sprawdzać opponent.board
 
-### 3. Brak logowania rozmieszczenia statków gracza
+### 2. Brak logowania rozmieszczenia statków gracza
 
 **Problem**
 - Przy pierwszym uruchomieniu programu zauważyłam brak logowania rozmieszczenia statków przez gracza 1. 

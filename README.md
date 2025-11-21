@@ -62,11 +62,13 @@ battleships/
 
 ## 📄 Format logów
 Przykład:
+```text
 HH:mm:ss.SSS place-ship: size=4 pos=(0,0) dir=horizontal
 HH:mm:ss.SSS shot: pos=(4,2) result=miss
 HH:mm:ss.SSS enemy-shot: pos=(3,1) result=hit
 HH:mm:ss.SSS game-over: result=win total-shots=47 enemy-total-shots=52
 HH:mm:ss.SSS enemy-ship: size=3 pos=(2,3) dir=vertical
+```
 
 ## 📦 Uwagi dodatkowe
 - Logika gry została zaprojektowana w sposób modularny (Board, Game, Player, Ship)
