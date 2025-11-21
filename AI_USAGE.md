@@ -8,7 +8,7 @@ W trakcie zadania używałam kilku agentów AI:
 - **ChatGPT (GPT-5.1 Thinking)** – pomoc przy:
   - doprecyzowaniu i rozbudowaniu promptów tak, żeby były zrozumiałe dla innego AI
   - analizie błędów wygenerowanego kodu
-- **Claude 3.5 Haiku** – użyty do:
+- **Claude 4.5 Haiku** – użyty do:
   - generowania zestawu testów jednostkowych (Jest) dla klasy `Board`
 
 ## 2. Przykłady promptów
