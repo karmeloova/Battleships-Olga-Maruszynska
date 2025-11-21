@@ -161,7 +161,7 @@ Generate all files with this structure and content now.
 ```
 
 **Czy AI dało dobry kod za pierwszym razem?**
-Tak - struktura projektu, typy i interefejsy były poprawne i zgodne z wymaganiami. Szkielet klas również był w porządku.
+- Tak - struktura projektu, typy i interefejsy były poprawne i zgodne z wymaganiami. Szkielet klas również był w porządku.
 
 **Co trzeba było coś poprawić/doprecyzować**
 - Przy dalszej implementacji musiałam zmienić dane przekazywane do funkcji służącej do logowania stawiania statków, ponieważ AI początkowo dało tablicę, a rozsądniej i wygodniej było przekazywać po jednym statku.
@@ -204,11 +204,11 @@ detect if a ship is sunk
 Implement allShipsSunk().
 ```
 
-** Czy AI dało dobry kod za pierwszym razem? **
-Nie. Logika była okej, jednak AI wygenerowało zbyt skomplikowaną strukturę.
+**Czy AI dało dobry kod za pierwszym razem?**
+- Nie. Logika była okej, jednak AI wygenerowało zbyt skomplikowaną strukturę.
 
 **Co trzeba było coś poprawić/doprecyzować**
-AI wprowadziło dwa źródła prawdy dla jednej planszy - grid + state.cells. Zdecydowałam się poprosić o poprawę tego - po poprawie wszystko było już poprawnie.
+- AI wprowadziło dwa źródła prawdy dla jednej planszy - grid + state.cells. Zdecydowałam się poprosić o poprawę tego - po poprawie wszystko było już poprawnie.
 
 ### Prompt 3 - Implementacja Player
 
@@ -248,10 +248,10 @@ Return the full content of Player.ts.
 ```
 
 **Czy AI dało dobry kod za pierwszym razem**
-Logika była sensowna, jednak miała poważny błąd merytoryczny.
+- Logika była sensowna, jednak miała poważny błąd merytoryczny.
 
 **Co trzeba było coś poprawić/doprecyzować**
-Było trzeba poprawić logikę oddawania strzałów. Zostało to naprawione przeze mnie (informacje w punkcie 3.).
+- Było trzeba poprawić logikę oddawania strzałów. Zostało to naprawione przeze mnie (informacje w punkcie 3.).
 
 ### Prompt 4 - Implementacja index.ts (główna pętla gry + logger)
 
@@ -291,10 +291,10 @@ JUST produce the correct TypeScript code for this file.
 ```
 
 **Czy AI za pierwszym razem dało dobry kod?**
-Struktura była dobra, jednak pojawiły się drobne błędy, które uniemożliwiały uruchomienie programu.
+- Struktura była dobra, jednak pojawiły się drobne błędy, które uniemożliwiały uruchomienie programu.
 
 **Co trzeba było coś poprawić/doprecyzować?**
-Trzeba było poprawić błędy, aby program w ogóle się odpalił. AI próbowało odwołać się do board.width i board.height zamiast board.config.height/width. Ponadto, podczas tworzenia planszy, bezpośrednio próbował ustawić height oraz width w konstruktorze planszy, zamiast zrobić poprzez stworzenie nowego BoardConfig.
+- Trzeba było poprawić błędy, aby program w ogóle się odpalił. AI próbowało odwołać się do board.width i board.height zamiast board.config.height/width. Ponadto, podczas tworzenia planszy, bezpośrednio próbował ustawić height oraz width w konstruktorze planszy, zamiast zrobić poprzez stworzenie nowego BoardConfig.
 Poprawki były proste, zatem zostały wykonane własnoręcznie.
 
 ### Prompt 5 - Generowanie testów jednostkowych
@@ -311,28 +311,28 @@ Include:
 ```
 
 **Czy AI za pierwszym razem dało dobry kod?**
-Tak. Kod od razu był dobry, testy uruchomiły się bez najmniejszego problemu
+- Tak. Kod od razu był dobry, testy uruchomiły się bez najmniejszego problemu
 
 **Co trzeba było coś poprawić/doprecyzować?**
--
+- Nic nie trzeba było poprawiać ani doprecyzowywać
 
 ## 3. Poprawki
 
 ### 1. Zbyt skomplikowane źródło prawdy
 
 **Problem**
-AI wygenerowało Board, który trzymał stan w:
+- AI wygenerowało Board, który trzymał stan w:
 - jakimś własnym gridzie używanym do logiki
 - oraz w state.cells
 Oznaczało dwie prawdy o tym samym stanie, co mogło przytczynić się do rozjazdów i trudniejszego debugowania.
 
 **Naprawa**
-Zrefaktoryzywałam Board do jednego źródła prawdy - wszystko oparte na state.cells.
+- Zrefaktoryzywałam Board do jednego źródła prawdy - wszystko oparte na state.cells.
 
 ### 2. Błędne założenie w Player.takeTurn
 
 **Problem**
-AI założyło, że 
+- AI założyło, że 
 ```bash
 // Coordinates already shot by THIS player
 const fired = this.board.state.shotsFired;
@@ -340,12 +340,12 @@ const fired = this.board.state.shotsFired;
 czyli sprawdzało, jakie opponent oddał strzały w planszę gracza pierwszego - "ile razy ktoś strzelał do mnie", a nie gdzie gracz chciał strzelić.
 
 **Naprawa**
-Poprawiłam, skąd brać informacje o już wykonanych strzałach - zamiast this.board należało sprawdzać opponent.board
+- Poprawiłam, skąd brać informacje o już wykonanych strzałach - zamiast this.board należało sprawdzać opponent.board
 
 ### 3. Brak logowania rozmieszczenia statków gracza
 
 **Problem**
-Przy pierwszym uruchomieniu programu zauważyłam brak logowania rozmieszczenia statków przez gracza 1. 
+- Przy pierwszym uruchomieniu programu zauważyłam brak logowania rozmieszczenia statków przez gracza 1. 
 ```bash
 1  19:07:33.983  shot: pos=(5,7) result=miss
 2  19:07:33.983  enemy-shot: pos=(1,4) result=miss
@@ -361,7 +361,7 @@ Przy pierwszym uruchomieniu programu zauważyłam brak logowania rozmieszczenia 
 Okazało się, że AI mimo stworzenia funkcji do rozmieszczania statków w Game.ts (która również logowała to rozmieszczenie) stawiała statki bezpośrednio poprzez board.placeShip, mimo, że funkcja w Game.ts również to robi.
 
 **Naprawa**
-Przerobiłam kod tak, aby rozmieszczanie statków szło poprzez Game.ts. Musiałam lekko zmodyfikować strukturę funkcji w Game.ts (zamiast przyjmowania tablicy ze statkami, funkcja przyjmuje pojedyczny statek), a następnie również zmodyfikować, tak aby zapisywała tylko i wyłącznie statki gracza pierwszego (żeby nie były widoczne statki drugiego gracza). Potem odpowiednio zmodyfikowałam logikę w głównym pliku gry (index.ts) i zamiast stawiać statki poprzez board.placeShip jest to realizowane przez game.placeShip.
+- Przerobiłam kod tak, aby rozmieszczanie statków szło poprzez Game.ts. Musiałam lekko zmodyfikować strukturę funkcji w Game.ts (zamiast przyjmowania tablicy ze statkami, funkcja przyjmuje pojedyczny statek), a następnie również zmodyfikować, tak aby zapisywała tylko i wyłącznie statki gracza pierwszego (żeby nie były widoczne statki drugiego gracza). Potem odpowiednio zmodyfikowałam logikę w głównym pliku gry (index.ts) i zamiast stawiać statki poprzez board.placeShip jest to realizowane przez game.placeShip.
 
 ## 4. Co działało dobrze, a co nie:
 ### Gdzie AI przyspieszyło pracę?
