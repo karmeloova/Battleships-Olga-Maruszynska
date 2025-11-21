@@ -33,7 +33,7 @@ Przykład sprawdza m.in.:
 - logikę hit/miss/sunk
 
 ## 📁 Struktura projektu 
-
+```bash
 battleships/
 ├── src/
 │   ├── board/
@@ -47,6 +47,7 @@ battleships/
 ├── README.md
 ├── AI_USAGE.md
 └── package.json
+```
 
 ## 📝 Opis działania
 - Każdy z dwóch graczy dostaje planszę 10x10 oraz standardową flotę statków (4x1, 3x2, 2x3, 1x4)
